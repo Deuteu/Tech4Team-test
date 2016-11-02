@@ -1,0 +1,1 @@
+json.array! @representations, partial: 'representations/representation', as: :representation
