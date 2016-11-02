@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :tickets
   resources :clients
   resources :representations
   resources :spectacles

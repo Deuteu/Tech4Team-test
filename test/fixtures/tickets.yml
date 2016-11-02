@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ref: 1
+  command: 1
+  reservation: 1
+  resaDate: 2016-11-02
+  resaTime: 2016-11-02 22:07:13
+  price: 1.5
+  accessDate: 2016-11-02
+  accessTime: 2016-11-02 22:07:13
+  tarif: MyString
+  type: 1
+  serie: MyString
+  floor: MyString
+  sellPoint: MyString
+
+two:
+  ref: 1
+  command: 1
+  reservation: 1
+  resaDate: 2016-11-02
+  resaTime: 2016-11-02 22:07:13
+  price: 1.5
+  accessDate: 2016-11-02
+  accessTime: 2016-11-02 22:07:13
+  tarif: MyString
+  type: 1
+  serie: MyString
+  floor: MyString
+  sellPoint: MyString
