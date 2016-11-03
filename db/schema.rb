@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20161103120432) do
 
   create_table "clients", force: :cascade do |t|
-    t.integer  "type"
+    t.integer  "kind"
     t.string   "name"
     t.string   "firstname"
     t.string   "email"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20161103120432) do
     t.date     "accessDate"
     t.time     "accessTime"
     t.string   "tarif"
-    t.string   "type"
+    t.string   "kind"
     t.string   "serie"
     t.string   "floor"
     t.string   "sellPoint"

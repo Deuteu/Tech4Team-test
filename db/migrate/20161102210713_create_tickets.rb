@@ -10,7 +10,7 @@ class CreateTickets < ActiveRecord::Migration
       t.date :accessDate
       t.time :accessTime
       t.string :tarif
-      t.string :type
+      t.string :kind
       t.string :serie
       t.string :floor
       t.string :sellPoint
