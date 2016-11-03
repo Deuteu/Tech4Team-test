@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :representations
   resources :spectacles
 
-  root 'import#form'
+  root 'import#data'
   get 'import' => 'import#form', as: 'import'
   post 'import' => 'import#import'
   # The priority is based upon order of creation: first created -> highest priority.

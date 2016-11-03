@@ -1,4 +1,7 @@
 class ImportController < ApplicationController
+  def data
+  end
+
   def form
   end
 
@@ -32,6 +35,6 @@ class ImportController < ApplicationController
         t.save
       end
     end
-    redirect_to import_path
+    redirect_to root_path, notice: "Success!"
   end
 end
