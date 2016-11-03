@@ -65,5 +65,15 @@
   <%= @ticket.sellPoint %>
 </p>
 
+<p>
+  <strong>Client:</strong>
+  <%= @ticket.client %>
+</p>
+
+<p>
+  <strong>Representation:</strong>
+  <%= @ticket.representation %>
+</p>
+
 <%= link_to 'Edit', edit_ticket_path(@ticket) %> |
 <%= link_to 'Back', tickets_path %>

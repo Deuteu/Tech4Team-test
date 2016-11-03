@@ -1,2 +1,2 @@
-json.extract! ticket, :id, :ref, :command, :reservation, :resaDate, :resaTime, :price, :accessDate, :accessTime, :tarif, :type, :serie, :floor, :sellPoint, :created_at, :updated_at
+json.extract! ticket, :id, :ref, :command, :reservation, :resaDate, :resaTime, :price, :accessDate, :accessTime, :tarif, :type, :serie, :floor, :sellPoint, :client, :representation, :created_at, :updated_at
 json.url ticket_url(ticket, format: :json)
