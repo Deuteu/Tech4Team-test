@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20161103120432) do
     t.date     "accessDate"
     t.time     "accessTime"
     t.string   "tarif"
-    t.integer  "type"
+    t.string   "type"
     t.string   "serie"
     t.string   "floor"
     t.string   "sellPoint"
