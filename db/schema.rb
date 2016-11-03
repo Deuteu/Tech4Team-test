@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161103102108) do
+ActiveRecord::Schema.define(version: 20161103120432) do
 
   create_table "clients", force: :cascade do |t|
     t.integer  "type"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20161103102108) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "clients", ["email"], name: "index_clients_on_email"
+
   create_table "representations", force: :cascade do |t|
     t.integer  "cle"
     t.string   "name"
@@ -39,6 +41,7 @@ ActiveRecord::Schema.define(version: 20161103102108) do
     t.integer  "spectacle_id"
   end
 
+  add_index "representations", ["cle"], name: "index_representations_on_cle"
   add_index "representations", ["spectacle_id"], name: "index_representations_on_spectacle_id"
 
   create_table "spectacles", force: :cascade do |t|
@@ -47,6 +50,8 @@ ActiveRecord::Schema.define(version: 20161103102108) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "spectacles", ["cle"], name: "index_spectacles_on_cle"
 
   create_table "tickets", force: :cascade do |t|
     t.integer  "ref"
@@ -69,6 +74,7 @@ ActiveRecord::Schema.define(version: 20161103102108) do
   end
 
   add_index "tickets", ["client_id"], name: "index_tickets_on_client_id"
+  add_index "tickets", ["ref"], name: "index_tickets_on_ref"
   add_index "tickets", ["representation_id"], name: "index_tickets_on_representation_id"
 
 end
