@@ -1,1 +1,0 @@
-json.partial! "representations/representation", representation: @representation
