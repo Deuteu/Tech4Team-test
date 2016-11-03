@@ -1,5 +1,5 @@
 class Ticket < ActiveRecord::Base
-  validates :reference, uniqueness: true
+  validates :ref, uniqueness: true
   enum type: [ :subscription, :individual ]
   belongs_to :client
   belongs_to :representation
