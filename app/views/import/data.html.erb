@@ -12,3 +12,9 @@
 
 <h3>Average age : <%= Client.average(:age) %></h3>
 <br/>
+
+<h3>Average price by spectacle :</h3>
+<ul><% Spectacle.all.each do |s| %>
+  <li><%= s.name %> : <%= s.tickets.average(:price) %></li>
+<% end %></ul>
+<br/>
