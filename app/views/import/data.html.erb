@@ -24,3 +24,8 @@
   <li><%= c.firstname + " " + c.name %> : <%= c.tickets.average(:price) %></li>
 <% end %></ul>
 <br/>
+
+<h3>Average price by cart :</h3>
+<ul><% Ticket.group(:reservation).average(:price).each do |cart| %>
+  <li><%= cart.first %> : <%= cart.last %></li>
+<% end %></ul>
