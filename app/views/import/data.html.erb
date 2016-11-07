@@ -21,32 +21,85 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="count">
-      <ul>
-        <li>Ticket : <%= Ticket.count %></li>
-        <li>Spectacle : <%= Spectacle.count %></li>
-        <li>Representation : <%= Representation.count %></li>
-        <li>Client : <%= Client.count %></li>
-      </ul>
+      <table class="table table-striped">
+        <tbody>
+            <tr>
+              <td>Ticket</td>
+              <td><%= Ticket.count %></td>
+            </tr>
+            <tr>
+              <td>Spectacle</td>
+              <td><%= Spectacle.count %></td>
+            </tr>
+            <tr>
+              <td>Representation</td>
+              <td><%= Representation.count %></td>
+            </tr>
+            <tr>
+              <td>Client</td>
+              <td><%= Client.count %></td>
+            </tr>
+        </tbody>
+      </table>
     </div>
     <div role="tabpanel" class="tab-pane" id="age">
       <%= Client.average(:age) %>
     </div>
     <div role="tabpanel" class="tab-pane" id="spectacle">
-      <ul><% Spectacle.all.each do |s| %>
-        <li><%= s.name %> : <%= s.tickets.average(:price) %></li>
-      <% end %></ul>
+      <table class="table table-striped">
+        <thead>
+            <th>Name</th>
+            <th>Average ticket price</th>
+            <th>Representations</th>
+            <th>Tickets</th>
+        </thead>
+        <tbody>
+          <% Spectacle.all.each do |s| %>
+            <tr>
+              <td><%= s.name %></td>
+              <td><%= s.tickets.average(:price) %></td>
+              <td><%= s.representations.count %></td>
+              <td><%= s.tickets.count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
     <div role="tabpanel" class="tab-pane" id="client">
-      <ul><% Client.all.each do |c| %>
-        <li><%= c.firstname + " " + c.name %> : <%= c.tickets.average(:price) %></li>
-      <% end %></ul>
+      <table class="table table-striped">
+        <thead>
+            <th>Name</th>
+            <th>Average price</th>
+            <th>Tickets</th>
+        </thead>
+        <tbody>
+          <% Client.all.each do |c| %>
+            <tr>
+              <td><%= c.firstname + " " + c.name %></td>
+              <td><%= c.tickets.average(:price) %></td>
+              <td><%= c.tickets.count %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
     <div role="tabpanel" class="tab-pane" id="cart">
       <% carts = Ticket.group(:reservation).average(:price) %>
       <p>Average cart price : <%= carts.sum(&:last)/carts.size %></p>
-      <ul><% carts.each do |cart| %>
-        <li><%= cart.first %> : <%= cart.last %></li>
-      <% end %></ul>
+      <table class="table table-striped">
+        <thead>
+            <th>Reservation number</th>
+            <th>Average ticket price</th>
+        </thead>
+        <tbody>
+          <% carts.each do |cart| %>
+            <tr>
+              <td><%= cart.first %></td>
+              <td><%= cart.last %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
