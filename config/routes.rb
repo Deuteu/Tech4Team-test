@@ -1,12 +1,8 @@
 Rails.application.routes.draw do
-  resources :tickets
-  resources :clients
-  resources :representations
-  resources :spectacles
-
   root 'import#data'
   get 'import' => 'import#form', as: 'import'
   post 'import' => 'import#import'
+  get 'export' => 'tickets#index', constraints: lambda { |req| req.format == :csv }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,8 +1,8 @@
 <%= flash[:notice] %>
 
 <h2>Data</h2>
-<%= link_to 'Import', import_path %>
-<br/>
+<%= link_to 'Import', import_path %><br/>
+<%= link_to "Export", export_path(format: "csv") %><br/>
 
 <h3>Counts :</h3>
 <ul>

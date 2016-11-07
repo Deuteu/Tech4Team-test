@@ -1,10 +1,17 @@
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
-  # GET /tickets
-  # GET /tickets.json
+  # GET /tickets.csv
   def index
     @tickets = Ticket.all
+
+    respond_to do |format|
+      #format.csv { send_data @products.to_csv }
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"export.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   # GET /tickets/1
