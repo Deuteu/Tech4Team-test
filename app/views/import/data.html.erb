@@ -18,3 +18,9 @@
   <li><%= s.name %> : <%= s.tickets.average(:price) %></li>
 <% end %></ul>
 <br/>
+
+<h3>Average price by client :</h3>
+<ul><% Client.all.each do |c| %>
+  <li><%= c.firstname + " " + c.name %> : <%= c.tickets.average(:price) %></li>
+<% end %></ul>
+<br/>
