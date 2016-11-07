@@ -29,6 +29,8 @@
 <br/>
 
 <h3>Average price by cart :</h3>
-<ul><% Ticket.group(:reservation).average(:price).each do |cart| %>
+<% carts = Ticket.group(:reservation).average(:price) %>
+<p>Average cart price : <%= carts.sum(&:last)/carts.size %></p>
+<ul><% carts.each do |cart| %>
   <li><%= cart.first %> : <%= cart.last %></li>
 <% end %></ul>
