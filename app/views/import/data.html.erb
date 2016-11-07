@@ -4,10 +4,13 @@
 <%= link_to 'Import', import_path %>
 <br/>
 
-<h3>Ticket : <%= Ticket.count %></h3>
-<h3>Spectacle : <%= Spectacle.count %></h3>
-<h3>Representation : <%= Representation.count %></h3>
-<h3>Client : <%= Client.count %></h3>
+<h3>Counts :</h3>
+<ul>
+  <li>Ticket : <%= Ticket.count %></li>
+  <li>Spectacle : <%= Spectacle.count %></li>
+  <li>Representation : <%= Representation.count %></li>
+  <li>Client : <%= Client.count %></li>
+</ul>
 <br/>
 
 <h3>Average age : <%= Client.average(:age) %></h3>
