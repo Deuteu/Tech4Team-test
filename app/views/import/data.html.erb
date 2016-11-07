@@ -1,2 +1,11 @@
+<%= flash[:notice] %>
+
 <h2>Data</h2>
 <%= link_to 'Import', import_path %>
+<br/>
+
+<h3>Ticket : <%= Ticket.count %></h3>
+<h3>Spectacle : <%= Spectacle.count %></h3>
+<h3>Representation : <%= Representation.count %></h3>
+<h3>Client : <%= Client.count %></h3>
+<br/>
