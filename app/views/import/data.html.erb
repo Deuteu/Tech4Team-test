@@ -1,36 +1,51 @@
 <%= flash[:notice] %>
 
 <h2>Data</h2>
-<%= link_to 'Import', import_path %><br/>
-<%= link_to "Export", export_path(format: "csv") %><br/>
+<div class="btn-group" role="group" aria-label="...">
+  <%= link_to 'Import', import_path, class: "btn btn-default" %>
+  <%= link_to "Export", export_path(format: "csv"), class: "btn btn-default" %>
+</div>
 
-<h3>Counts :</h3>
-<ul>
-  <li>Ticket : <%= Ticket.count %></li>
-  <li>Spectacle : <%= Spectacle.count %></li>
-  <li>Representation : <%= Representation.count %></li>
-  <li>Client : <%= Client.count %></li>
-</ul>
-<br/>
+<div>
 
-<h3>Average age : <%= Client.average(:age) %></h3>
-<br/>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#count" aria-controls="count" role="tab" data-toggle="tab">Counts</a></li>
+    <li role="presentation"><a href="#age" aria-controls="age" role="tab" data-toggle="tab">Average age</a></li>
+    <li role="presentation"><a href="#spectacle" aria-controls="spectacle" role="tab" data-toggle="tab">By spectacle</a></li>
+    <li role="presentation"><a href="#client" aria-controls="client" role="tab" data-toggle="tab">By client</a></li>
+    <li role="presentation"><a href="#cart" aria-controls="cart" role="tab" data-toggle="tab">By cart</a></li>
+  </ul>
 
-<h3>Average price by spectacle :</h3>
-<ul><% Spectacle.all.each do |s| %>
-  <li><%= s.name %> : <%= s.tickets.average(:price) %></li>
-<% end %></ul>
-<br/>
-
-<h3>Average price by client :</h3>
-<ul><% Client.all.each do |c| %>
-  <li><%= c.firstname + " " + c.name %> : <%= c.tickets.average(:price) %></li>
-<% end %></ul>
-<br/>
-
-<h3>Average price by cart :</h3>
-<% carts = Ticket.group(:reservation).average(:price) %>
-<p>Average cart price : <%= carts.sum(&:last)/carts.size %></p>
-<ul><% carts.each do |cart| %>
-  <li><%= cart.first %> : <%= cart.last %></li>
-<% end %></ul>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="count">
+      <ul>
+        <li>Ticket : <%= Ticket.count %></li>
+        <li>Spectacle : <%= Spectacle.count %></li>
+        <li>Representation : <%= Representation.count %></li>
+        <li>Client : <%= Client.count %></li>
+      </ul>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="age">
+      <%= Client.average(:age) %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="spectacle">
+      <ul><% Spectacle.all.each do |s| %>
+        <li><%= s.name %> : <%= s.tickets.average(:price) %></li>
+      <% end %></ul>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="client">
+      <ul><% Client.all.each do |c| %>
+        <li><%= c.firstname + " " + c.name %> : <%= c.tickets.average(:price) %></li>
+      <% end %></ul>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="cart">
+      <% carts = Ticket.group(:reservation).average(:price) %>
+      <p>Average cart price : <%= carts.sum(&:last)/carts.size %></p>
+      <ul><% carts.each do |cart| %>
+        <li><%= cart.first %> : <%= cart.last %></li>
+      <% end %></ul>
+    </div>
+  </div>
+</div>
