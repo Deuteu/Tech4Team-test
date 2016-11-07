@@ -6,7 +6,6 @@ class ImportController < ApplicationController
   end
 
   def import
-    require 'csv'
     require 'tempfile'
     file = params[:file]
     recodedFile = Tempfile.new('recodedImport')
