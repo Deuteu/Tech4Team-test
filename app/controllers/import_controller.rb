@@ -14,22 +14,47 @@ class ImportController < ApplicationController
       out << File.open(file.path).read.encode("UTF-8", :invalid=>:replace, :replace=>"?")
     end 
     CSV.foreach(recodedFile.path, :headers => true, col_sep: ";") do |row|
-      hash = row.to_hash
-      if !Ticket.find_by ref: hash['Numero billet']
+      hashRow = row.to_hash
+      if !Ticket.find_by ref: hashRow['Numero billet']
+        s = Spectacle.create_with(name: hashRow['Spectacle']).find_or_create_by(cle: hashRow['Cle spectacle'])
+        repArgs = {
+          name: hashRow['Representation'],
+          startDate: hashRow['Date representation'],
+          startTime: hashRow['Heure representation'],
+          endDate: hashRow['Date fin representation'],
+          endTime: hashRow['Heure fin representation'],
+          spectacle: s
+        }
+        r = Representation.create_with(repArgs).find_or_create_by(cle: hashRow['Cle representation'])
+        dict = {"F"=>"female", "M"=>"male"}
+        s = dict.include? hashRow['Sexe'] ? dict[hashRow['Sexe']] : ""
+        clientArgs = {
+          kind: hashRow['Type de client'],
+          name: hashRow['Nom'],
+          firstname: hashRow['Prenom'],
+          adresse: hashRow['Adresse'],
+          codePostal: hashRow['Code postal'],
+          country: hashRow['Pays'],
+          age: hashRow['Age'],
+          sexe: s
+        }
+        c = Client.create_with(clientArgs).find_or_create_by(email: hashRow['Email'])
         ticketArgs = {
-          ref: hash['Numero billet'],
-          command: hash['Commande'],
-          reservation: hash['Reservation'],
-          resaDate: hash['Date reservation'],
-          resaTime: hash['Heur reservation'],
-          price: hash['Prix'],
-          accessDate: hash['Date acces'],
-          accessTime: hash['Heure acces'],
-          tarif: hash['Tarif'],
-          type: hash['Type de produit'],
-          serie: hash['Serie'],
-          floor: hash['Etage'],
-          sellPoint: hash['Filiere de vente']
+          ref: hashRow['Numero billet'],
+          command: hashRow['Commande'],
+          reservation: hashRow['Reservation'],
+          resaDate: hashRow['Date reservation'],
+          resaTime: hashRow['Heur reservation'],
+          price: hashRow['Prix'],
+          accessDate: hashRow['Date acces'],
+          accessTime: hashRow['Heure acces'],
+          tarif: hashRow['Tarif'],
+          kind: hashRow['Type de produit'],
+          serie: hashRow['Serie'],
+          floor: hashRow['Etage'],
+          sellPoint: hashRow['Filiere de vente'],
+          representation: r,
+          client: c
         }
         t = Ticket.new ticketArgs
         t.save
